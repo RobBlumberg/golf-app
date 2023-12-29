@@ -5,7 +5,7 @@ const app = express();
 const port = 3000;
 
 app.use("/players", playerRouter);
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
   console.error(err);
   res.status(500).send("Internal Server Error");
 });

@@ -1,27 +1,35 @@
-const playerList = [
-  { id: 1, name: "Rob", age: 26 },
-  { id: 2, name: "Borse", age: 26 },
-  { id: 3, name: "Pierre", age: 26 },
-];
+const Player = require("../models/players");
 
-function getPlayers(req, res, next) {
+async function getPlayers(req, res, next) {
   try {
-    return res.send(playerList);
+    const players = await Player.query();
+    return res.json(players);
   } catch (error) {
     console.log("Error");
     next(error);
   }
 }
 
-function getPlayer(req, res, next) {
+async function getPlayer(req, res, next) {
   try {
     const id = parseInt(req.params.id);
-    const player = playerList.find((p) => p.id === id);
+    const player = await Player.query().findById(id);
 
     if (!player) {
       return res.status(404).send({ message: "Player not found" });
     }
-    return res.send(player);
+    return res.json(player);
+  } catch (error) {
+    console.log("Error");
+    next(error);
+  }
+}
+
+async function insertPlayer(req, res, next) {
+  try {
+    const { name } = req.body;
+    const player = await Player.query().insert({ name });
+    return res.status(201).json(player);
   } catch (error) {
     console.log("Error");
     next(error);
@@ -31,4 +39,5 @@ function getPlayer(req, res, next) {
 module.exports = {
   getPlayers,
   getPlayer,
+  insertPlayer,
 };

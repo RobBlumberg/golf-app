@@ -6,13 +6,17 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src/",
-    "app": "node src/app.js",
-    "format": "prettier . --write"
+    "start": "node src/app.js",
+    "format": "prettier . --write",
+    "migrate": "knex migrate:latest --knexfile src/database/knexfile.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
+    "knex": "^3.1.0",
+    "objection": "^3.1.3",
+    "pg": "^8.11.3",
     "prettier": "^3.1.1"
   },
   "devDependencies": {
