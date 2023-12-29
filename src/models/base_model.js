@@ -1,4 +1,4 @@
-knexConfig = require("../database/knexfile");
+const knexConfig = require("../database/knexfile");
 const knex = require("knex")(knexConfig[process.env.NODE_ENV]);
 const { Model } = require("objection");
 

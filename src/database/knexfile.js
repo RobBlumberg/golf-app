@@ -1,4 +1,4 @@
-knexConfig = {
+const knexConfig = {
   development: {
     client: "pg",
     connection: {
